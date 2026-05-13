@@ -1,4 +1,44 @@
 Declarative Pipeline
+
+A Declarative Pipeline is a structured, simplified way to write Jenkins automation code using a specific syntax hierarchy. It must be 
+enclosed within a pipeline block and is typically saved in a file named Jenkinsfile at the root of a code repository.
+
+Key Syntax Elements
+
+pipeline: The mandatory outer block that wraps the entire script.
+agent: Defines where the pipeline runs (e.g., any, none, or a specific Docker container).
+stages: A container for one or more individual execution stages.stage: A logical segment of the pipeline (e.g., 'Build', 'Test', 'Deploy').
+steps: The actual commands or tasks executed inside a single stage.
+
+Basic Jenkinsfile Template
+
+pipeline {
+    agent any 
+    stages {
+        stage('Build') {
+            steps {
+                echo 'Building application...'
+            }
+        }
+        stage('Test') {
+            steps {
+                echo 'Running unit tests...'
+            }
+        }
+        stage('Deploy') {
+            steps {
+                echo 'Deploying to production...'
+            }
+        }
+    }
+}
+
+We will create a Pipeline project.
+
+1. Go to Jenkins Dashboard. Click on New Item.
+2. Give a name - CICD and select Pipeline. Click ok/save
+3. Give a description, go to Definition and write a pipeline script. 
+4. Select try sample pipeline (as we have just started), change any details and any stages if you want.  
 Jenkins Agents (Multi-Node)
 Shared Libraries
 User Management in Jenkins (Role Based)
