@@ -48,11 +48,76 @@ architecture, so it isn't advised to perform tasks on the server.
 Go to Manage Jenkins and see the message "Building on the built-in node can be a security issue. You should set up distributed builds."
 You don't run builds on Built-in node, you just place order or instruction and that order runs on another server.
 
-Click on Set up an Agent as you need another server for the worker node. So after this create an ec2 instance for Jenkins worker with all same t2.micro, ubuntu and allowing all http, https etc and 
+Create an ec2 instance for Jenkins worker with all same t2.micro, ubuntu and allowing all http, https etc and 
 8gb memory. 
 
 Launch another ssh client/terminal and connect the jenkins-agent on it using ssh
+Use the following commands to install Java as Jenkins requires Java for running. 
 
+sudo apt update
+sudo apt install fontconfig openjdk-21-jre
+java -version
+
+We need to connect the master with worker. So on the master terminal use the command 
+[ubuntu@ip-172-31-69-179:/var/lib/jenkins/workspace/CICD/devops$ cd ~/.ssh
+Then 
+ubuntu@ip-172-31-69-179:~/.ssh$ls 
+authorized keys
+to see the authorized keys. (As the master needs to have the private key and the worker needs to have public key)
+Now
+ubuntu@ip-172-31-69-179:~/.ssh$ssh-keygen
+You will be prompted with default file name, just keep pressing enter (3 times)
+
+ubuntu@ip-172-31-69-179:~/.ssh$ls
+Now you have 
+authorized_keys  id_ed25519  id_ed25519.pub
+where id_ed25519 is the private key and id_ed25519.pub is the public key
+
+Now do 
+ubuntu@ip-172-31-69-179:~/.ssh$cat id_ed25519.pub            #as private key is already at master, public key needs to be copied to worker
+Copy the code it gives and go to the worker terminal
+
+ubuntu@ip-172-31-17-140:~$ cd .ssh/            #agent-worker
+ubuntu@ip-172-31-17-140:~/.ssh$ ls            #agent-worker
+authorized_keys
+ubuntu@ip-172-31-17-140:~/.ssh$ vim authorized_keys 
+
+Now paste the key after the all the lines and esq+:wq
+
+On Jenkins dashboard, click on Set up an Agent as you need another server for the worker node, provide the name agent-worker, select 
+permanent (you want the worker node permanently) and then you provide description - this is an ubuntu machine agent, number of executors 1, set root directory as 
+/home/ubuntu (as all the work will be done here), labels as worker (name is agent-worker), launch method is via ssh - here set host as 
+public ip address of worker and in credentials - select Jenkins or Global credentials (and in the box fill all the credentials, id -
+ubuntu-ki-key, same for description and in the private key section - add the private key details obtained from master terminal)
+cat private key (id_ed25519 - see down) and paste that.
+
+You should see the worker node agent-worker successfully connected and online.
+
+Now you can actually run a job - CICD (previously made) on this worker node.
+1. Set the pipeline as agent {label "worker"} instead of agent any (see line 16 above)
+2. Save and run the job CICD on Jenkins dashboard. (In my case the agent worker was offline, go to nodes, turn it online and then see
+the CICD job build successfully.)
+3. Since we created a folder devops in workspace, go to the worker terminal and check the folder is created.
+
+ubuntu@ip-172-31-17-140:~$ cd workspace/
+ubuntu@ip-172-31-17-140:~/workspace$ ls
+CICD  CICD@tmp
+ubuntu@ip-172-31-17-140:~/workspace$ ls
+CICD  CICD@tmp
+ubuntu@ip-172-31-17-140:~/workspace$ cd CICD
+ubuntu@ip-172-31-17-140:~/workspace/CICD$ ls
+devops
+
+Check a Declarative Pipeline demo from 57 - 1:31 minutes in the video for a Django project - Django-notes-app (where we groovy to build code,
+building, testing and deploying on the Jenkins worker). Once build is successful on Jenkins worker, finally chek the browser on port 8000.
+
+2. Github Webhook
+A GitHub Webhook triggers a Jenkins job automatically every time a developer pushes code or opens a pull request. It removes the need for 
+Jenkins to constantly poll the repository for changes.
+Note-Jenkins runs on the 8080 port, so for EC2 instance the 8080 port should be open for Anywhere-ipv4 so that any changes made in github
+will trigger the job in Jenkins.
+
+Check video from 1:32 - 1:40
 Shared Libraries
 User Management in Jenkins (Role Based)
 CI/CD project with Kubernetes, ArgoCD, Prometheus
