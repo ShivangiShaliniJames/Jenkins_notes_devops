@@ -71,13 +71,6 @@ We will do a wanderlust-project and Django app later.
 echo "Hello Friends"
 echo "How are you guys doing?"
 
+Troubleshooting - he Jenkins job remained pending because the built-in node was offline due to low system resources, and restarting 
+Jenkins along with adding swap memory restored executor availability.
 
-
-
-Declarative Pipeline
-Jenkins Agents (Multi-Node)
-Shared Libraries
-User Management in Jenkins (Role Based)
-CI/CD project with Kubernetes, ArgoCD, Prometheus
-DevSecOps with OWASP, Trivy, Sonarqube
-Email Notification on Pipeline Fail/Pass
