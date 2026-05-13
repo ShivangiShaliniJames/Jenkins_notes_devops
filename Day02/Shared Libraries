@@ -26,7 +26,3 @@ C. Go to the new menu item: Manage Jenkins \(\rightarrow \) Manage and Assign Ro
 D. Click Manage Roles to create a role (e.g., a developer global role with "Overall Read" and an item role with dev-.* pattern for full job access).
 E. Click Assign Roles to bind specific users or external directory groups to your newly created roles.
 
-
-CI/CD project with Kubernetes, ArgoCD, Prometheus
-DevSecOps with OWASP, Trivy, Sonarqube
-Email Notification on Pipeline Fail/Pass
