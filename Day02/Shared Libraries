@@ -1,0 +1,32 @@
+Shared Libraries
+A Jenkins Shared Library is a dedicated Git repository that stores reusable Groovy scripts. It centralizes pipeline logic, eliminating 
+code duplication across separate Jenkinsfile files.
+Checke video from 1:41 to 2:00
+
+
+User Management in Jenkins (Role Based)
+
+User management in Jenkins encompasses two distinct layers: Authentication (verifying who the user is) and Authorization (controlling 
+what the user can do). [video 2:01 - 2:07]
+
+1. Creating Users Locally
+By default, Jenkins uses its built-in database.
+1. Navigate to Manage Jenkins \(\rightarrow \) Users.
+2. Click Create User in the left menu.
+3. Fill in the Username, Password, Full Name, and Email Address, then click Create User.
+
+2. External Authentication (Security Realms)For production setups, it is a best practice to delegate authentication to an enterprise 
+identity provider. Go to Manage Jenkins \(\rightarrow \) Security \(\rightarrow \) Security Realm to configure plugins like LDAP, 
+Active Directory, SAML 2.0, or GitHub Authentication.
+
+3. Step-by-Step: Setting Up Role-Based Strategy
+A. Install the Role-based Authorization Strategy plugin via Plugins.
+B. Go to Manage Jenkins \(\rightarrow \) Security, switch Authorization to Role-Based Strategy, and click Save.
+C. Go to the new menu item: Manage Jenkins \(\rightarrow \) Manage and Assign Roles.
+D. Click Manage Roles to create a role (e.g., a developer global role with "Overall Read" and an item role with dev-.* pattern for full job access).
+E. Click Assign Roles to bind specific users or external directory groups to your newly created roles.
+
+
+CI/CD project with Kubernetes, ArgoCD, Prometheus
+DevSecOps with OWASP, Trivy, Sonarqube
+Email Notification on Pipeline Fail/Pass
