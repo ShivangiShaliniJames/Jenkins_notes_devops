@@ -1,3 +1,11 @@
-CI/CD project with Kubernetes, ArgoCD, Prometheus
-DevSecOps with OWASP, Trivy, Sonarqube
-Email Notification on Pipeline Fail/Pass
+1. Wanderlust - CI/CD project with Kubernetes, ArgoCD, Prometheus
+[Video 2:16 (Demo), Project - 2:31]
+Backend - Node.js
+Frontend - React.js
+DB - MongoDB
+[Do this project once done with Terraform, Kubernetes and ArgoCD, Ansible video]
+
+
+2. Shared Library Realtime project [3:56]
+3. DevSecOps with OWASP, Trivy, Sonarqube [4:48]
+4. Email Notification on Pipeline Fail/Pass [5:54]
