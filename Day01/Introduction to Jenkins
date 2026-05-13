@@ -1,9 +1,79 @@
 Topics:
 
-Introduction to Jenkins & CI/CD
-Jenkins setup on VM
-Jenkins UI / Dashboard / Jobs
-Jenkins Freestyle Project
+1. Introduction to Jenkins & CI/CD
+
+Jenkins is a leading open-source automation server used to implement Continuous Integration (CI) and Continuous Delivery (CD), allowing 
+developers to automate the building, testing, and deployment of software. It is a Java-based, self-contained program that runs on Windows, 
+Linux, macOS, and other Unix-like systems.
+
+Core Function: It automates repetitive manual steps in the development lifecycle, accelerating delivery and improving software quality.
+Pipeline as Code: Jenkins uses Jenkinsfile (using Groovy syntax) to define build, test, and deploy stages, allowing pipelines to be 
+version-controlled.
+Extensibility: With over 1,900+ community-contributed plugins, Jenkins integrates with practically every tool in the DevOps toolchain, including Docker, Kubernetes, Git, and various cloud services.Architecture: It operates on a master-agent (formerly master-slave) architecture, enabling distributed builds across multiple machines for faster execution.
+Installation: It can be installed natively or via Docker for portability.
+
+2.Jenkins setup on VM - After setting up the ec2 instance on AWS and securely connecting to the instance on ssh or local client, 
+search jenkins install on google and select Linux option as the ec2 instance was created with Ubuntu OS. 
+We will get the commands to install Jenkins. (The link is - https://www.jenkins.io/doc/book/installing/linux/)
+Check pre-requisites also to make sure we have sufficient memory in the instance.
+
+Installation of Java
+Jenkins requires Java to run, yet not all Linux distributions include Java by default. Additionally, not all Java versions are compatible 
+with Jenkins.
+
+sudo apt update
+sudo apt install fontconfig openjdk-21-jre
+java -version
+
+Now use the Long Term Support release (Stable version)
+sudo wget -O /etc/apt/keyrings/jenkins-keyring.asc \
+  https://pkg.jenkins.io/debian-stable/jenkins.io-2026.key
+echo "deb [signed-by=/etc/apt/keyrings/jenkins-keyring.asc]" \
+  https://pkg.jenkins.io/debian-stable binary/ | sudo tee \
+  /etc/apt/sources.list.d/jenkins.list > /dev/null
+sudo apt update
+sudo apt install jenkins
+
+To check if Jenkins is installed, on ec2 instance - 
+systemctl status jenkins
+After seeing the status as active(running), use Ctrl+c to come back to instance prompt (e.g. ubuntu@ip-172-31-69-179:~$ )
+
+sudo systemctl enable jenkins (Jenkins runs on port 8080). So now check if Jenkins is running on the browser using ip in your instance. (Before this edit inbound rules and add port 8080 with custom tcp and anywhere ipv4)
+
+Now once we jenkins running on the browser, use the command - sudo cat /var/lib/jenkins/secrets/initialAdminPassword
+Copy and paste the password. 
+
+Now select Install suggested plugins.
+
+After it is done, set new password and the Jenkins will be set up. 
+
+Jenkins URL - http://100.48.43.195:8080/
+
+
+Jenkins UI / Dashboard / Jobs - 
+ 1. Job: A job in Jenkins is an automated task, such as building, testing, or deploying code, that runs sequentially as defined by the 
+    user
+    Jenkins jobs, often called projects, are the core unit of work for CI/CD processes
+
+3. Jenkins Freestyle Project
+ Key Job Types in Jenkins:
+  1a. Pipeline: Recommended for complex, multi-stage workflows (defined via Jenkinsfile)
+  1b. Freestyle Project: A basic, GUI-configured task for simple operations
+  1c. Multibranch Pipeline: Automatically creates jobs for every branch in a repository
+  1d. Maven Project: Specialized for building projects with pom.xml files
+
+We will do a wanderlust-project and Django app later.
+
+1. Create a Job
+2. Select Freestyle Project, click ok
+3. In Description, write This is a simple project.
+4. Go down to Build Steps, Add Build Steps and click on Execute Shell and add commands
+echo "Hello Friends"
+echo "How are you guys doing?"
+
+
+
+
 Declarative Pipeline
 Jenkins Agents (Multi-Node)
 Shared Libraries
