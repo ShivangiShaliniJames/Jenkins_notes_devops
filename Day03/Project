@@ -1,0 +1,3 @@
+CI/CD project with Kubernetes, ArgoCD, Prometheus
+DevSecOps with OWASP, Trivy, Sonarqube
+Email Notification on Pipeline Fail/Pass
