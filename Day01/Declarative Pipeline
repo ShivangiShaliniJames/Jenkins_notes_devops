@@ -117,9 +117,35 @@ Jenkins to constantly poll the repository for changes.
 Note-Jenkins runs on the 8080 port, so for EC2 instance the 8080 port should be open for Anywhere-ipv4 so that any changes made in github
 will trigger the job in Jenkins.
 
-Check video from 1:32 - 1:40
-Shared Libraries
-User Management in Jenkins (Role Based)
-CI/CD project with Kubernetes, ArgoCD, Prometheus
-DevSecOps with OWASP, Trivy, Sonarqube
-Email Notification on Pipeline Fail/Pass
+1. Configure the Jenkins Job
+A. Open the Jenkins dashboard.
+B. Select your pipeline or freestyle project and click Configure.
+C. Under the Build Triggers section, check the box for GitHub hook trigger for GITScm polling.
+D. Click Save.
+
+2. Configure the GitHub Repository
+A. Navigate to your repository on GitHub.
+B. Click Settings (the gear icon on the top menu bar).
+C. Click Webhooks in the left sidebar.
+D. Click the Add webhook button
+
+3. Complete the Webhook Fields
+A. Payload URL: Enter https://<your-jenkins-server-url>/github-webhook/ (The trailing slash is mandatory).
+B. Content type: Select application/json.
+C. Secret: Leave blank unless you have configured a secret token in Jenkins global security.
+D. Which events: Select Just the push event (default) or Let me select individual events if you need Pull Request triggers.
+E. Active: Ensure this checkbox is checked.
+F. Click Add webhook.
+
+4. Verify the Connection
+A. Look at the Webhooks list in GitHub after saving.
+B. A green checkmark indicates a successful 200 OK handshake response from Jenkins.
+C. A red warning sign indicates a network or URL error (commonly caused by Jenkins running on a local localhost network that GitHub cannot
+reach).
+
+Troubleshooting Local Environments
+If Jenkins is running on a local machine, you must expose it to the internet so GitHub can reach the payload URL. Use a tunneling tool 
+like ngrok to create a public forwarding URL:
+
+ngrok http 8080
+
