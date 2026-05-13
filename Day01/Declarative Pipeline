@@ -1,4 +1,4 @@
-Declarative Pipeline
+1. Declarative Pipeline
 
 A Declarative Pipeline is a structured, simplified way to write Jenkins automation code using a specific syntax hierarchy. It must be 
 enclosed within a pipeline block and is typically saved in a file named Jenkinsfile at the root of a code repository.
@@ -39,7 +39,20 @@ We will create a Pipeline project.
 2. Give a name - CICD and select Pipeline. Click ok/save
 3. Give a description, go to Definition and write a pipeline script. 
 4. Select try sample pipeline (as we have just started), change any details and any stages if you want.  
-Jenkins Agents (Multi-Node)
+5. Build the pipeline and see the console output for result.
+
+2. Jenkins Agents (Multi-Node)
+Here we have used agent any, but in industry it is advised to create pipeline/projects on another agent. Jenkins follows Master-Slave 
+architecture, so it isn't advised to perform tasks on the server. 
+
+Go to Manage Jenkins and see the message "Building on the built-in node can be a security issue. You should set up distributed builds."
+You don't run builds on Built-in node, you just place order or instruction and that order runs on another server.
+
+Click on Set up an Agent as you need another server for the worker node. So after this create an ec2 instance for Jenkins worker with all same t2.micro, ubuntu and allowing all http, https etc and 
+8gb memory. 
+
+Launch another ssh client/terminal and connect the jenkins-agent on it using ssh
+
 Shared Libraries
 User Management in Jenkins (Role Based)
 CI/CD project with Kubernetes, ArgoCD, Prometheus
