@@ -108,12 +108,12 @@ ubuntu@ip-172-31-17-140:~/workspace$ cd CICD
 ubuntu@ip-172-31-17-140:~/workspace/CICD$ ls
 devops
 
-Check a Declarative Pipeline demo from 57 - 1:31 minutes in the video for a Django project - Django-notes-app (where we groovy to build code,
-building, testing and deploying on the Jenkins worker). Once build is successful on Jenkins worker, finally chek the browser on port 8000.
+Check a Declarative Pipeline demo from 57 - 1:31 minutes in the video for a Django project - Django-notes-app (where we use groovy to build code,
+test and deploy on the Jenkins worker). Once build is successful on Jenkins worker, finally check the browser on port 8000.
 
 2. Github Webhook
 A GitHub Webhook triggers a Jenkins job automatically every time a developer pushes code or opens a pull request. It removes the need for 
-Jenkins to constantly poll the repository for changes.
+Jenkins to constantly pull the repository for changes.
 Note-Jenkins runs on the 8080 port, so for EC2 instance the 8080 port should be open for Anywhere-ipv4 so that any changes made in github
 will trigger the job in Jenkins.
 
