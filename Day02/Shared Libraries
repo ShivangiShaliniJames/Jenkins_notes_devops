@@ -11,9 +11,9 @@ what the user can do). [video 2:01 - 2:07]
 
 1. Creating Users Locally
 By default, Jenkins uses its built-in database.
-1. Navigate to Manage Jenkins \(\rightarrow \) Users.
-2. Click Create User in the left menu.
-3. Fill in the Username, Password, Full Name, and Email Address, then click Create User.
+A. Navigate to Manage Jenkins \(\rightarrow \) Users.
+B. Click Create User in the left menu.
+C. Fill in the Username, Password, Full Name, and Email Address, then click Create User.
 
 2. External Authentication (Security Realms)For production setups, it is a best practice to delegate authentication to an enterprise 
 identity provider. Go to Manage Jenkins \(\rightarrow \) Security \(\rightarrow \) Security Realm to configure plugins like LDAP, 
